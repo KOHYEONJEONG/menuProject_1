@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="menu:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>menu</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="menu-1.0.0-BUILD-SNAPSHOT.war">
+      <element id="artifact" artifact-name="menu:war exploded" />
+    </root>
+  </artifact>
+</component>

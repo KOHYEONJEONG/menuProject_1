@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<!-- 이 페이지는 servlet-context.xml에서 작성해줘야 연결됨-->
+
+<!-- 구현하고자하는 메소드가 정의된 클래스의 패키지 -->
+<mapper namespace="com.menu.dao.IMenuDao">
+
+	<select id="selectMenuList" resultType="com.menu.vo.MenuDBVO">
+		SELECT m.YMD AS ymd, f.FOOD_NM AS foodNm, i.INGREDIENTS_NM AS ingredientsNm, c2.code_nm AS mealNm
+		FROM CMS_FOOD f,CMS_MENU m, CMS_COMMON_CODE c1, CMS_COMMON_CODE c2, CMS_INGREDIENTS i, CMS_RECIPE r
+		WHERE m.FOOD_ID = f.FOOD_ID AND
+		m.RESTAURANT_ID = c1.CODE_ID AND
+		m.MEAL_ID = c2.CODE_ID AND
+		r.INGREDIENTS_ID = i.INGREDIENTS_ID AND
+		m.food_id = r.food_id AND
+		TO_CHAR(m.YMD,'YYYY-MM-DD') BETWEEN #{startDate} AND #{endDate} AND
+		c1.CODE_NM= #{restaurantName}
+		<if test="mealName != '전체'">
+			AND c2.CODE_NM = #{mealName}
+		</if>
+		ORDER BY c2.code_id,YMD,food_nm,ingredientsNm
+	</select>
+
+	<select id="selectMenuListTest" resultType="com.menu.vo.MenuDBVO">
+		SELECT m.YMD as menuYmd , f.FOOD_NM as menuNm, i.INGREDIENTS_NM as ingredientsNm , c2.code_nm as mealNm
+		FROM CMS_FOOD f,CMS_MENU m, CMS_COMMON_CODE c1, CMS_COMMON_CODE c2, CMS_INGREDIENTS i, CMS_RECIPE r
+		WHERE m.FOOD_ID = f.FOOD_ID AND
+		m.RESTAURANT_ID = c1.CODE_ID AND
+		m.MEAL_ID = c2.CODE_ID AND
+		r.INGREDIENTS_ID = i.INGREDIENTS_ID AND
+		m.food_id = r.food_id AND
+		TO_CHAR(m.YMD,'YYMMDD') BETWEEN 220103 AND 220107 AND
+		c1.CODE_NM= '여민관'
+		ORDER BY YMD,c2.CODE_ID
+	</select>
+
+	<select id="selectCode" resultType="com.menu.vo.MenuCodeVo">
+		select CODE_ID, CODE_NM
+		from cms_common_code
+		order by code_ID
+	</select>
+
+
+
+	
+</mapper>
