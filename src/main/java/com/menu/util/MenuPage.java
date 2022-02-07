@@ -73,13 +73,12 @@ public class MenuPage {
             int max = Collections.max(arr);//각 식사구분에 요일 리스트중 최대길이를 찾음
 
             int maxLine = 0;
-            for (DayMeal dayMeal : md.getDayMealList()) {//행 길이 구하기
+            for (DayMeal dayMeal : md.getDayMealList()) {//월-일요일까지
 
-                //빼기 해야하나
-
-                if(dayMeal.getMenuRecipeList().size() == max){
-                    maxLine = dayMeal.getMenuRecipeList().size();
-                }
+                //max가 있어 조식에  그럼 이제 나머지 사이즈를 구해서 max에 나머지 + 20개씩 만들어서 수를 구해.
+                //if(dayMeal.getMenuRecipeList().size() == max){
+                    maxLine = maxLine - dayMeal.getMenuRecipeList().size();
+                //}
                 //dayMeal.getMenuRecipeList().size()
                 //조식,중식,석식,간식에 총 길이를 구해서, 나눠야할듯, max 값을 구해서 그중 가장 큰값을 찾아서
 
@@ -132,10 +131,11 @@ public class MenuPage {
                     //이제 시작값을 구해야한다.(k 값을 조건문을 만들어서 넣어줘야한다) - 없으면 0부터 시작되게 해야할듯
                     int remainderIndex=0;
 
-                    startIndx = remainderIndex<0?0:remainderIndex%nowPage;
+                    //20개 이상 row면 페이지수*20 시작 인덱스
+                    startIndx = remainderIndex==pageBlock?0:remainderIndex*(nowPage+1);
 
                     logger.info("dayMeal : "+dayMeal.getMenuRecipeList().size());
-                    for (int k= 0; k < Math.min(dayMeal.getMenuRecipeList().size(), pageBlock); k++) {
+                    for (int k= startIndx; k < Math.min(dayMeal.getMenuRecipeList().size(), pageBlock); k++) {
                         dayMealNew.getMenuRecipeList().add(new MenuRecipe(dayMeal.getMenuRecipeList().get(k).getFoodName(), dayMeal.getMenuRecipeList().get(k).getIngredientsName()));
                         System.out.println(dayMeal.getMenuRecipeList().get(k).getFoodName()+" : "+ dayMeal.getMenuRecipeList().get(k).getIngredientsName());
                         remainderIndex++;
@@ -144,8 +144,7 @@ public class MenuPage {
                     mealDivisionNew.getDayMealList().set(j, dayMealNew);//set(인덱스,값) 사용. - add() 사용하면 옆으로 늘어남.
                     j++;//월-일 인덱스
 
-                    weekMenuTable.getMdList().add(mealDivisionNew);
-                    weekMenuTableList.set(nowPage,weekMenuTable);//수정해야함.
+                    weekMenuTable.getMdList().add(mealDivisionNew);//조식,중식,석식,간식(한페이지)
 
                     if(dayMeal.getMenuRecipeList().size()>(nowPage+1)*pageBlock){
                         nowPage++;//현재페이지를 확인하기 위해서 (ex) 2*20 <-- 인덱스값에다가 더 하려고)
@@ -158,18 +157,9 @@ public class MenuPage {
                     }
 
                 }//DayMeal
-                
-
             }//md * 4
-
-
-
-            // weekMenuTableList.add(weekMenuTable2);//페이지 하나당 (조식,중식,석식,간식)-weekMenuTable2
-           // .weekMenuTableList.add(weekMenuTableFor);//페이지 하나당 (조식,중식,석식,간식)-weekMenuTable2
+            weekMenuTableList.set(nowPage,weekMenuTable);//weekMenuTable이 여러개 생기니까 list에 담아줌.
         }//page 수 만큼 weekMenuTable2 생성
-
-
-        //weekMenuTableList.add(weekMenuTable2);
 
         return weekMenuTableList;
         }//큰 for문
