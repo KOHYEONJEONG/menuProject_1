@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class MenuController {
@@ -50,14 +51,18 @@ public class MenuController {
 
         MenuPage menuPage = new MenuPage(weekMenuTable);
 
-        MenuPage mp = menuPage.paging();
+        ArrayList<WeekMenuTable> weekMenuTable1 = menuPage.paging();
 
         //MenuPage menuPage=menuServiceImpl.paging(weekMenuTable);
         //menuServiceImpl.paging(weekMenuTable);
 
-        model.addAttribute("weekMenuTable",weekMenuTable);
+        model.addAttribute("weekMenuTable",weekMenuTable);//기존거라
 
-        return "printMenu";
+        //테스트..
+        model.addAttribute("weekMenuTable1",weekMenuTable1);
+
+        //return "printMenu";
+        return  "printMenu_Test2";
     }
 
     @RequestMapping("/printMenuTest.do")

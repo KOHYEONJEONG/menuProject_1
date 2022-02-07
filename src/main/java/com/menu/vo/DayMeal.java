@@ -10,5 +10,4 @@ import java.util.List;
 @Setter
 public class DayMeal {
     List<MenuRecipe> menuRecipeList = new ArrayList<>();
-
 }

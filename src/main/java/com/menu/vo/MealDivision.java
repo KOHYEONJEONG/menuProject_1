@@ -25,11 +25,11 @@ public class MealDivision {//순서2
 
     public MealDivision(){
         dayMealList.add(new DayMeal());//월
-        dayMealList.add(new DayMeal());
-        dayMealList.add(new DayMeal());
-        dayMealList.add(new DayMeal());
-        dayMealList.add(new DayMeal());
-        dayMealList.add(new DayMeal());
+        dayMealList.add(new DayMeal());//화
+        dayMealList.add(new DayMeal());//수
+        dayMealList.add(new DayMeal());//목
+        dayMealList.add(new DayMeal());//금
+        dayMealList.add(new DayMeal());//토
         dayMealList.add(new DayMeal());//일
     }
 

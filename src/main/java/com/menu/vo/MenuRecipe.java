@@ -6,8 +6,8 @@ import lombok.Setter;
 @Getter
 @Setter
 public class MenuRecipe {//순서1
-    String foodName;
-    String ingredientsName;
+    String foodName;//음식명
+    String ingredientsName;//재료명
 
     public MenuRecipe(String foodName, String ingredientsName) {
         this.foodName = foodName;

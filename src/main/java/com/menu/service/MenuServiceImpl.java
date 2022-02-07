@@ -53,27 +53,27 @@ public class MenuServiceImpl implements IMenuService {
         DateFormat input = new SimpleDateFormat("E");
 
         for(MenuDBVO menuDBVO : vo){
-            logger.info("-------------------" + menuDBVO.getYmd());
+            //logger.info("-------------------" + menuDBVO.getYmd());
             Date date = menuDBVO.getYmd();
             String toStringYmd = input.format(date);
 
             if(menuDBVO.getMealNm().equals("조식")){
-                logger.info("조식------------------------------");
+                //logger.info("조식------------------------------");
                 //월-일
                 dayDivision(toStringYmd,breakFast,menuDBVO);
 
             }else if(menuDBVO.getMealNm().equals("중식")){
-                logger.info("중식------------------------------");
+                //logger.info("중식------------------------------");
                 //월-일
                 dayDivision(toStringYmd,lunch,menuDBVO);
 
             }else if(menuDBVO.getMealNm().equals("석식")){
-                logger.info("석식------------------------------");
+                //logger.info("석식------------------------------");
                 //월-일
                 dayDivision(toStringYmd,dinner,menuDBVO);
 
             }else if(menuDBVO.getMealNm().equals("간식")){
-                logger.info("간식------------------------------");
+                //logger.info("간식------------------------------");
                 //월-일
                 dayDivision(toStringYmd,snack,menuDBVO);
             }

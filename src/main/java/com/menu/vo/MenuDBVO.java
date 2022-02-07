@@ -7,10 +7,10 @@ import java.util.Date;
 
 
 public class MenuDBVO {
-    Date ymd;
-    String foodNm;
-    String ingredientsNm;
-    String mealNm;
+    Date ymd;//년월일
+    String foodNm;//음식명
+    String ingredientsNm;//재료명
+    String mealNm;//조식,중식,석식,간식
 
     public Date getYmd() {
         return ymd;
