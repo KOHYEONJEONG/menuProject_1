@@ -90,6 +90,9 @@
     <h4><c:out value="${param.startDate}"/> 현재</h4>
 
     <h4>식당명 : <c:out value="${weekMenuTable.restaurantName}"/>, 기간 : <c:out value="${weekMenuTable.startDate}"/>~<c:out value="${weekMenuTable.endDate}"/></h4>
+
+
+    <c:forEach items="${menuPage.weekMenuTableList}" var="weekMenuList" varStatus="status"> <%--바뀜--%>
     <table border="1" bordercolor="blue" width ="1200" height="300" align = "center" style="table-layout:fixed;">
         <thead>
             <tr>
@@ -130,7 +133,7 @@
         </c:choose>
 
         <%--<c:forEach items="${weekMenuTable1.mdList}" var="weekMenu" begin="${begin}" end="${end}" varStatus="status">--%>
-        <c:forEach items="${weekMenuTable1}" var="weekMenuList" varStatus="status"> <%--바뀜--%>
+
         <c:forEach items="${weekMenuList.mdList}" var="weekMenu" > <%--하나 추가바뀜--%>
         <tr>
             <!--조식,중식,석식,간식 식사구분-->
@@ -153,28 +156,28 @@
 
 
 
-                    <c:forEach items="${weekMenu.dayMealList}" var="dayList" ><%--바뀜--%>
-                    ${dayMealList.menuRecipeList}
-                    <c:set var="foodNameDistinct" value=""/>
-                    <td>
-                        <ul>
-                    <c:forEach items="${dayList.menuRecipeList}" var="menuList">
+                <c:forEach items="${weekMenu.dayMealList}" var="dayList" ><%--바뀜--%>
+                ${dayMealList.menuRecipeList}
+                <c:set var="foodNameDistinct" value=""/>
+                <td>
+                    <ul>
+                <c:forEach items="${dayList.menuRecipeList}" var="menuList">
 
-                        <c:if test="${foodNameDistinct ne menuList.foodName}">
+                    <c:if test="${foodNameDistinct ne menuList.foodName}">
 
-                            <li class="foodName" style="background-color: greenyellow;align-content:center;">
-                                <c:set var="foodNameDistinct" value="${menuList.foodName}"/>
-                                <c:out value="${foodNameDistinct}"></c:out>
-                            </li>
-                        </c:if>
-                            <!--재료-->
-                            <li> <c:out value="${menuList.ingredientsName}"></c:out> </li>
-                    </c:forEach>
-                        </ul> <!--위치중요-->
-                    </td>
-
+                        <li class="foodName" style="background-color: greenyellow;align-content:center;">
+                            <c:set var="foodNameDistinct" value="${menuList.foodName}"/>
+                            <c:out value="${foodNameDistinct}"></c:out>
+                        </li>
+                    </c:if>
+                        <!--재료-->
+                        <li> <c:out value="${menuList.ingredientsName}"></c:out> </li>
                 </c:forEach>
-                </c:forEach>
+                    </ul> <!--위치중요-->
+                </td>
+
+            </c:forEach>
+            </c:forEach>
 
 
             </tr>

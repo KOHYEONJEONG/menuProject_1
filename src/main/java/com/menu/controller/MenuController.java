@@ -35,8 +35,6 @@ public class MenuController {
         return "searchMenu";
     }
 
-
-
     @RequestMapping("/printMenu.do")
     public String printMenu(Model model, SearchData vo){
         logger.info("getStartDate ---"+vo.getStartDate()+vo.getEndDate()+vo.getMealName());
@@ -49,17 +47,12 @@ public class MenuController {
 
         WeekMenuTable weekMenuTable = menuServiceImpl.getTable(vo,menuVo);
 
-        MenuPage menuPage = new MenuPage(weekMenuTable);
+        MenuPage menuPage = new MenuPage(weekMenuTable);//생성자 안에서 페이징까지함.
 
-        ArrayList<WeekMenuTable> weekMenuTable1 = menuPage.paging();
-
-        //MenuPage menuPage=menuServiceImpl.paging(weekMenuTable);
-        //menuServiceImpl.paging(weekMenuTable);
-
-        model.addAttribute("weekMenuTable",weekMenuTable);//기존거라
+        model.addAttribute("weekMenuTable",weekMenuTable);//기존거
 
         //테스트..
-        model.addAttribute("weekMenuTable1",weekMenuTable1);
+        model.addAttribute("menuPage",menuPage);
 
         //return "printMenu";
         return  "printMenu_Test2";
